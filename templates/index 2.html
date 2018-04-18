@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{{ url_for('findmp') }}" method="POST">
+    <h5 class="display-5">Enter your postcode</h5>
+    <input type="number" aria-label="postcode" name="postcode"/>
+    <button type="submit" class="btn btn-success" id="submit" name="submit"/>Go!</button>
+</form>
+{% endblock %}
