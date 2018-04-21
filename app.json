@@ -1,7 +1,21 @@
 {
-  "name": "Volunteer score",
-  "description": "A small web app that sorts Nationbuilder supporters by their likelihood to volunteer",
-  "repository": "https://github.com/ToolsforRadicals/volunteerscore",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
-  "keywords": ["python", "nationbuilder", "volunteer"]
+    "name": "Volunteer score",
+    "description": "A small web app that sorts Nationbuilder supporters by their likelihood to volunteer",
+    "repository": "https://github.com/ToolsforRadicals/volunteerscore",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": [
+        "python",
+        "nationbuilder",
+        "volunteer"
+    ],
+    "env": {
+        "geocoder": {
+            "description": "The Geocoder you'd like to use:",
+            "value": "GoogleV3"
+        },
+        "geocoder_api_key": {
+            "description": "The API key for your chosen geocoder",
+            "value": ""
+        }
+    }
 }

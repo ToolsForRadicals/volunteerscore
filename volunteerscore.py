@@ -1,7 +1,7 @@
 outfile = 'upload/support_scores.csv'
 
 print("Loading ABS Data files. May take a few minutes")
-
+import os
 import pandas as pd
 pd.options.mode.chained_assignment = None
 sa1filename = 'data/2011Census_B19_AUST_SA1_short.csv'
@@ -11,7 +11,17 @@ import scipy.stats as stats
 from gender_detector.gender_detector import GenderDetector
 gender =  GenderDetector('uk')
 from geopy import geocoders
-g = geocoders.Bing('AkDshUctFFg0jtgXvUYsHanWN3b6qedpS0Ax2oLG-e_yC0Q8AHAai-b9kg1sqX50')
+try:
+    geocoding_engine = os.environ['geocoding_engine']
+    geocoder_api_key = os.environ['geocoder_api_key']
+    if geocoding_engine == 'Bing':
+        g = geocoders.Bing(geocoder_api_key)
+    if (geocoding_engine == 'GoogleV3') and (len(geocoder_api_key) > 1):
+        g = geocoders.GoogleV3(geocoder_api_key)
+    if geocoding_engine == 'Nominatim':
+        g = geocoders.Nominatim()
+except:
+    g = geocoders.GoogleV3()
 postcodefile = 'data/2011PostcodetoSA2.csv'
 postcodes = pd.DataFrame.from_csv(postcodefile, parse_dates=False, infer_datetime_format=False)
 import datetime

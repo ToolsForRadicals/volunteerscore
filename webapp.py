@@ -4,15 +4,18 @@ from werkzeug import secure_filename
 import os
 import time
 from flask import Response
+import markdown
+from flask import Markup
 #import volunteerscore
 
 UPLOAD_FOLDER = 'upload/'
 ALLOWED_EXTENSIONS = set(['csv'])
 
 app = Flask(__name__)
-app.debug=True
+app.debug = True
 app.secret_key = "q9283jrisadjfklasdfoqiweurlkajsdf"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -22,7 +25,8 @@ def allowed_file(filename):
 @app.route('/getfile/<thisfile>')
 def uploaded_file(thisfile):
     #return outfile
-    return send_from_directory(app.config['UPLOAD_FOLDER'],thisfile)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], thisfile)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -30,17 +34,21 @@ def upload_file():
         file = request.files['file']
         if file and allowed_file(file.filename):
             session['filename'] = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], session['filename']))
+            file.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], session['filename']))
             #return redirect('/convert/')
             return redirect(url_for('getscores',
                                     filename=session['filename']))
-    session.pop('filename',None)
+    session.pop('filename', None)
     return render_template('index.html')
 
 
 @app.route('/about')
 def about():
-    return render_template('base.html')
+    with open('readme.md', 'r') as f:
+        content = Markup(markdown.markdown(f.read()))
+    return render_template('markdown.html', content=content)
+
 
 @app.route('/uploads/<filename>')
 def getscores(filename):
