@@ -1,5 +1,5 @@
 {
-  "name": "Tools for Radicals: Volunteer score",
+  "name": "Volunteer score",
   "description": "A small web app that sorts Nationbuilder supporters by their likelihood to volunteer",
   "repository": "https://github.com/ToolsforRadicals/volunteerscore",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
