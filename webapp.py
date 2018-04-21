@@ -38,7 +38,9 @@ def upload_file():
     return render_template('index.html')
 
 
-
+@app.route('/about')
+def about():
+    return render_template('base.html')
 
 @app.route('/uploads/<filename>')
 def getscores(filename):
