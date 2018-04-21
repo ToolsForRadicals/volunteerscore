@@ -15,7 +15,8 @@
         },
         "geocoder_api_key": {
             "description": "The API key for your chosen geocoder",
-            "value": ""
+            "value": "",
+            "required": false
         }
     }
 }
