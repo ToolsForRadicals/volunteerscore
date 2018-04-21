@@ -57,7 +57,7 @@ def getscores(filename):
         <title>Processing File...</title>
         <center>
         <h1>Processing File</h1>
-        <img src="http://sierrafire.cr.usgs.gov/images/loading.gif" width=250 height=250>'''
+        <img src="http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif" width=250 height=250>'''
         yield '<br>Loading ABS Data Set. May take a few minutes...<br>'
         import volunteerscore
         yield '<br>Dataset loaded. Processing your file...<br>'
