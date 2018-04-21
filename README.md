@@ -1,6 +1,8 @@
 # Tools for Radicals: Volunteer Score
 This is a small web app that sorts Nationbuilder supporters by their likelihood to volunteer. It takes a Nationbuilder CSV export, and returns a list of Nationbuilder IDs, and an "inferred_support_score" between 1-5, where 5 is 'very likely to volunteer', and 1 is 'very unlikely to volunteer'
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 You can try a demo at https://volunteerscore.herokuapp.com
 
 ## How it works
