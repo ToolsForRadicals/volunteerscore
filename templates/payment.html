@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<p> Volunteerscore is free for you to use. If you'd like to </p>
+<form action="{{ url_for('stripepaid') }}" method="POST">
+<script
+  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  data-key="pk_test_Y6KSTTm24MVRQwj4bWISUytJ"
+  data-amount="999"
+  data-name="Organized"
+  data-description="Volunteerscore On Monthly Subscription"
+  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+  data-locale="auto"
+  data-zip-code="true"
+  data-currency="aud">
+</script>
+</form>
+{% endblock %}

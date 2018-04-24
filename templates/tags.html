@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+{% block content %}
+<form method="post" action="{{ url_for('makepeople') }}">
+  <div class="col-xs-12">
+    <h4>Step 1:
+      <br> Choose a Nationbuilder List</h4>
+    <p> Volunteerscore will sort this list in to three new lists called Your List_low, Your List_medium and Your List_high</p>
+    <select name="listid" class="form-control">
+      <option name="listid" value="-1">Entire Nation (Not recommended, slow)</option>
+      {% for item in lists %}
+      <option name="listid" value="{{ item.id }}">{{ item.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-success" id="submit" name="submit" />Sort these volunteers</button>
+  </div>
+
+
+</form>
+{% endblock %}

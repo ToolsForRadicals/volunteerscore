@@ -104,40 +104,40 @@ def getvolunteerscore(supporter):
         return 0
     return supportlevel
 
+def geocode_address(postcode,address=None):
+    if address:
+        try:
+            result = g.geocode(address)
+            if result:
+                lat = result[1][0]
+                lon = result[1][1]
+                from coord_to_census import coord_to_census
+                location = coord_to_census(lat,lon)
+                sa1 = int(location[1])
+                return sa1
+        except:
+            pass
+    sa2 = postcode_to_sa2(postcode)
+    return sa2
+
+
+
 def makescores(inputfilename):
     supporters = pd.DataFrame.from_csv(inputfilename, parse_dates=False, infer_datetime_format=False)
     allsupporters = supporters.iterrows()
     scores = list()
     for index,supporter in allsupporters:
         data = dict()
-        if not pd.isnull(supporter['primary_address1']):
+        if pd.isnull(supporter['primary_address1']):
             try:
                 address = "{primary_address2} {primary_address1} {primary_city} {primary_state} Australia".format(**supporter)
-                result = g.geocode(address)
-                if result:
-                    supporter['lat'] = result[1][0]
-                    supporter['lon'] = result[1][1]
-                    from coord_to_census import coord_to_census
-                    location = coord_to_census(supporter['lat'],supporter['lon'])
-                    supporter['sa1'] = int(location[1])
+                supporter['region'] = geocode_address(supporter['primary_zip'],address)
             except:
-                print("Problem geocoding this address")
-                supporter['sa2'] = postcode_to_sa2(supporter['primary_zip'])
-        else:
-            if not pd.isnull(supporter['primary_zip']):
-                supporter['sa2'] = postcode_to_sa2(supporter['primary_zip'])
-        if 'sa1' in supporter:
-            supporter['region'] = supporter['sa1']
-            data['sa1'] = supporter['sa1']
-        else:
-            if 'sa2' in supporter:
-                supporter['region'] = supporter['sa2']
-                data['sa2'] = supporter['sa2']
-            else:
-                supporter['region'] = None
+                supporter['region'] =  None
         data['inferred_support_level'] = getvolunteerscore(supporter)
         data['nationbuilder_id'] = index
         data['sex'] = supporter['sex']
+        data['region'] = supporter['region']
         scores.append(data)
     return scores
 

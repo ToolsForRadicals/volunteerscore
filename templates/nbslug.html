@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<form name="form" action="{{ url_for('authorizenationbuilder') }}" method="POST">
+<p> Enter your Nationbuilder Slug to get started</p>
+    <div class="row">
+    <div class="col-sm-4">
+    <div class="input-group">
+  <input type="text" class="form-control" placeholder="mynation" aria-describedby="nation_slug" id="nation_slug" name="nation_slug">
+  <span class="input-group-addon">.nationbuilder.com</span>
+        </div>
+</div>
+        </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <br>
+<button type="submit" class="btn btn-success" id="submit" name="submit"/>Authorize my Nation</button>
+        </div>
+        </div>
+</form>
+{% endblock %}
