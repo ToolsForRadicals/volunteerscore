@@ -7,16 +7,5 @@
         "python",
         "nationbuilder",
         "volunteer"
-    ],
-    "env": {
-        "geocoder": {
-            "description": "The Geocoder you'd like to use. Options are: GoogleV3, Bing, Nominatim.",
-            "value": "GoogleV3"
-        },
-        "geocoder_api_key": {
-            "description": "The API key for your chosen geocoder (Optional)",
-            "value": "",
-            "required": false
-        }
-    }
+    ]
 }
