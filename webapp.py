@@ -13,7 +13,7 @@ import json
 
 production = False
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
 Session(app)
@@ -40,7 +40,7 @@ else:
 def about():
     with open('readme.md', 'r') as f:
         content = Markup(markdown.markdown(f.read()))
-    return render_template('markdown.html', content=content)
+    return flask.render_template('markdown.html', content=content)
 
 
 @app.route('/processing', methods=['POST','GET'])
@@ -71,15 +71,16 @@ def makepeople():
         listdetails = listdetails[0]
         
         labels = ['Low','Medium','High']
-        
+        peoplecount = 0
         for i,prioritised_list in enumerate(prioritised_lists):
             listname = "{}_{}".format(listdetails['name'],labels[i])
             thislist = nb.makeList(nation,listname)
-            listdetails = thislist.json()
+            thislistdetails = thislist.json()
             #if the list has a 200 response
             peoplelist = [person['id'] for person in prioritised_list]
-            addlist = nb.addPeopletoList(nation,peoplelist,int(listdetails['list_resource']['id']))
-    return render_template("")
+            peoplecount += len(peoplelist)
+            addlist = nb.addPeopletoList(nation,peoplelist,int(thislistdetails['list_resource']['id']))
+    return render_template("success.html",listname=listdetails['name'], peoplecount=peoplecount)
 
 
 # @app.route('/subscribe', methods=['POST','GET'])
