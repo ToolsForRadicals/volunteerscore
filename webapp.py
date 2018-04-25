@@ -20,7 +20,6 @@ Session(app)
 
 app.debug = True
 app.secret_key = "q9283jrisadjfklasdfoqiweurlkajsdf"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if production:
     app.config['CELERY_BROKER_URL'] = 'amqp://guest@localhost'
